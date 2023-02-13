@@ -1,8 +1,8 @@
 # bon-nft-staking
 
 # @DEV NOTES
->> do now
-A. test out rewards contract with my setup
+
+> Do now: test out rewards contract with my setup
 1. make dummy token on Mumbai
 2. make dummy nfts on mumbai; use this as a change to clean out and put in place holders to package
 3. deploy dummy staking contract
@@ -10,4 +10,4 @@ A. test out rewards contract with my setup
 5. test out all the functions
 
 >> do later
-- xx
+- 
