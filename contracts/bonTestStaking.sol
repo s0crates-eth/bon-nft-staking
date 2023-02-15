@@ -8,6 +8,8 @@ https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/
 - add a small dapp tax
 - perhaps some onlyOwner functions like Monday and xxx
 - rewardsPerHour needs to find smth like this.value and then take a set percentage respective to the number of other stakers
+- always update variables first before withdrawing/etc
+- add something like ReEntracyguard contracts
 
 */
 
