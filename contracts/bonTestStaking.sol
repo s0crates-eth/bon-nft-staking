@@ -7,6 +7,7 @@ https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/
 - check the gas data for emits; too costly?
 - add a small dapp tax
 - perhaps some onlyOwner functions like Monday and xxx
+- rewardsPerHour needs to find smth like this.value and then take a set percentage respective to the number of other stakers
 
 */
 
