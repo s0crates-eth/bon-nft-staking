@@ -5,7 +5,7 @@ https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/
 
 - this should have more emits that can be used as JS triggers
 - check the gas data for emits; too costly?
-- x
+- add a small dapp tax
 
 */
 
