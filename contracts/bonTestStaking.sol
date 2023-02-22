@@ -32,6 +32,7 @@ contract Rewards is ERC20, ERC721Holder, Ownable {
         nft = IERC721(_nft);
     }
     function stake(uint256 tokenId) external {
+        // have some if else statements gas fee payment
         nft.safeTransferFrom(msg.sender, address(this), tokenId);
         tokenOwnerOf[tokenId] = msg.sender;
         tokenStakedAt[tokenId] = block.timestamp;
