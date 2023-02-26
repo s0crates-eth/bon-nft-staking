@@ -8,6 +8,7 @@ NOTES:
 - NEEDS to be tested on testnet and then peerchecked
 - make the 1 in 1/1000 an onlyOwner variable
 - need to emit after stake unstake funcs
+- need a func to provide readable time left till withdrawl
 */
 
 import "@openzeppelin/contracts/access/Ownable.sol";
