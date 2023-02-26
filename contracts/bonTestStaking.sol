@@ -6,6 +6,7 @@ pragma solidity ^0.8.17;
 NOTES:
 - from @ https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/ 
 - NEEDS to be tested on testnet and then peerchecked
+- make the 1 in 1/1000 an onlyOwner variable
 */
 
 import "@openzeppelin/contracts/access/Ownable.sol";
