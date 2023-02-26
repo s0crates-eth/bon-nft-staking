@@ -7,6 +7,7 @@ NOTES:
 - from @ https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/ 
 - NEEDS to be tested on testnet and then peerchecked
 - make the 1 in 1/1000 an onlyOwner variable
+- need to emit after stake unstake funcs
 */
 
 import "@openzeppelin/contracts/access/Ownable.sol";
