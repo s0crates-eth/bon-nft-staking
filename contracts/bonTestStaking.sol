@@ -25,8 +25,6 @@ contract Rewards is ERC721Holder, Ownable {
     constructor(address _nft){
         nft = IERC721(_nft);
     }
-    //^^ need to enter nft address on deploy to tie them together
-    //^^ can I delete the erc20?
 
     function stake(uint256 tokenId) external {
         require(isStakeActive, "Staking is paused.");
