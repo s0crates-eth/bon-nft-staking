@@ -5,7 +5,11 @@ pragma solidity ^0.8.17;
 /*
 NOTES:
 - from @ https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/ 
-- NEEDS to be tested on testnet and then peerchecked
+- need to convert this from sending matic rewards to sending BON
+--- import IERC20.sol
+--- constructor (address _bonAddress)
+--- bonToken = IERC20(_bonAddress);
+--- ;;; uint bonBalance = bonToken.balanceOf(address(this)); 
 - make the 1 in 1/1000 an onlyOwner variable
 - need to emit after stake unstake funcs
 - need a func to provide readable time left till withdrawl
