@@ -77,7 +77,7 @@ contract Rewards is ERC721Holder, Ownable {
 
         // holderNFT burn should go here
         nft.transferFrom(address(this), msg.sender, tokenId);
-        erc20Token.transfer(address(this), msg.sender, userReward);
+        erc20Token.transferFrom(address(this), msg.sender, userReward);
 
         emit newUnstaked(msg.sender, tokenId, userReward);
     }
