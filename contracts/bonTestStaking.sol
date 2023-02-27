@@ -5,7 +5,7 @@ pragma solidity ^0.8.17;
 /*
 NOTES:
 - from @ https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/ 
-- vvv Do I need this to recieve the erc20 tokens???
+- vvv Do I need this to recieve the erc20 tokens (sent directly to the contract for uses as rewards)?
     interface IReceiver {
         function receiveTokens(address tokenAddress, uint256 amount) external;
     }
