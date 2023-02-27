@@ -5,8 +5,6 @@ pragma solidity ^0.8.17;
 /*
 NOTES:
 - from @ https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/ 
-- need to emit after stake unstake funcs
-- need a func to provide readable time left till withdrawl
 - vvv Do I need this to recieve the erc20 tokens???
     interface IReceiver {
         function receiveTokens(address tokenAddress, uint256 amount) external;
@@ -21,6 +19,8 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 contract Rewards is ERC721Holder, Ownable {
     IERC721 public nft;
+    IERC20 public erc20Token;
+    
     mapping(uint256 => address) public tokenOwnerOf;
     mapping(uint256 => uint256) public tokenStakedAt;
     mapping(uint256 => bool) public isStaked;
@@ -30,30 +30,41 @@ contract Rewards is ERC721Holder, Ownable {
     uint256 public rwdRate = 1; // 0.1% of the CURRENT $BON balance
     bool public isStakeActive;
 
-    constructor(address _nftAddress, address _bonAddress){
+    event newStaked(address sender, uint256 tokenId);
+    event newUnstaked(address sender, uint256 tokenId, uint256 reward);
+
+    constructor(address _nftAddress, address _tokenAddress){
         nft = IERC721(_nftAddress);
-        bonToken = IERC20(_bonAddress);
+        erc20Token = IERC20(_tokenAddress);
     }
 
     function stake(uint256 tokenId) external {
         require(isStakeActive, "Staking is paused.");
         require(price <= msg.value, "Insufficient gas value");
         nft.safeTransferFrom(msg.sender, address(this), tokenId);
+        // holderNFT mint should go here
         tokenOwnerOf[tokenId] = msg.sender;
         tokenStakedAt[tokenId] = block.timestamp;
         isStaked[tokenId] = true;
+
+        emit newStaked(msg.sender, tokenId);
     }
-    //^^ may need some sort of revert check to make sure the NFT was able to be transfered/recieved?
 
     function calculateRewards(uint256 tokenId) public view returns (uint256) {
         require(isStaked[tokenId], "This Token id was never staked");
-        uint bonBalance = bonToken.balanceOf(address(this)); 
-        return bonBalance * (rwdRate / 1000);
+        uint erc20Balance = erc20Token.balanceOf(address(this)); 
+        return erc20Balance * (rwdRate / 1000);
+    }
+
+    function calculateTime(uint256 tokenId) public view returns (uint256) {
+        require(isStaked[tokenId], "This Token id was never staked");
+        uint256 timeElapsed = block.timestamp - tokenStakedAt[tokenId];
+        return timeElapsed;
     }
 
     function unstake(uint256 tokenId) external payable{
-        uint256 timeElapsed = block.timestamp - tokenStakedAt[tokenId];
         uint256 userReward = calculateRewards(tokenId);
+        uint256 timeElapsed = calculateTime(tokenId);
 
         require(tokenOwnerOf[tokenId] == msg.sender, "You can't unstake because you are not the owner");
         require(timeElapsed >= minimumTime, "You must wait the minimum time before claiming rewards");
@@ -64,11 +75,12 @@ contract Rewards is ERC721Holder, Ownable {
         delete tokenStakedAt[tokenId];
         delete isStaked[tokenId];
 
-        ( bool transferOne, ) = payable(msg.sender).call{value: userReward}(""); 
-        require(transferOne, "Transfer failed."); //this needs to be ERC20-ified
+        // holderNFT burn should go here
         nft.transferFrom(address(this), msg.sender, tokenId);
+        erc20Token.transfer(address(this), msg.sender, userReward);
+
+        emit newUnstaked(msg.sender, tokenId, userReward);
     }
-    //^^ this might need a reentrancy guard?
 
     // onlyOwnerz
     function setPrice(uint256 _price) external onlyOwner {
