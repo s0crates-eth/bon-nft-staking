@@ -5,16 +5,16 @@ pragma solidity ^0.8.17;
 /*
 NOTES:
 - from @ https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/ 
-- need to convert this from sending matic rewards to sending BON
---- import IERC20.sol
---- constructor (address _bonAddress)
---- bonToken = IERC20(_bonAddress);
---- ;;; uint bonBalance = bonToken.balanceOf(address(this)); 
-- make the 1 in 1/1000 an onlyOwner variable
 - need to emit after stake unstake funcs
 - need a func to provide readable time left till withdrawl
+- vvv Do I need this to recieve the erc20 tokens???
+    interface IReceiver {
+        function receiveTokens(address tokenAddress, uint256 amount) external;
+    }
+- need to change the withdrawAll to allow 'all thats left' on last transfer
 */
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
@@ -27,10 +27,12 @@ contract Rewards is ERC721Holder, Ownable {
 
     uint256 public minimumTime = 7 days;
     uint256 public price = 420690000000000000; // 0.42069 matic tax
+    uint256 public rwdRate = 1; // 0.1% of the CURRENT $BON balance
     bool public isStakeActive;
 
-    constructor(address _nft){
-        nft = IERC721(_nft);
+    constructor(address _nftAddress, address _bonAddress){
+        nft = IERC721(_nftAddress);
+        bonToken = IERC20(_bonAddress);
     }
 
     function stake(uint256 tokenId) external {
@@ -45,8 +47,8 @@ contract Rewards is ERC721Holder, Ownable {
 
     function calculateRewards(uint256 tokenId) public view returns (uint256) {
         require(isStaked[tokenId], "This Token id was never staked");
-        uint256 balance = address(this).balance;
-        return balance * 1 / 1000; // 0.1% of the CURRENT contract balance
+        uint bonBalance = bonToken.balanceOf(address(this)); 
+        return bonBalance * (rwdRate / 1000);
     }
 
     function unstake(uint256 tokenId) external payable{
@@ -62,8 +64,8 @@ contract Rewards is ERC721Holder, Ownable {
         delete tokenStakedAt[tokenId];
         delete isStaked[tokenId];
 
-        ( bool transferOne, ) = payable(msg.sender).call{value: userReward}("");
-        require(transferOne, "Transfer failed.");
+        ( bool transferOne, ) = payable(msg.sender).call{value: userReward}(""); 
+        require(transferOne, "Transfer failed."); //this needs to be ERC20-ified
         nft.transferFrom(address(this), msg.sender, tokenId);
     }
     //^^ this might need a reentrancy guard?
@@ -74,6 +76,9 @@ contract Rewards is ERC721Holder, Ownable {
     }
     function setTime(uint256 _minimumTime) external onlyOwner {
         minimumTime = _minimumTime;
+    }
+    function setRate(uint256 _rwdRate) external onlyOwner {
+        rwdRate = _rwdRate;
     }
     function flipStakeState() external onlyOwner {
         isStakeActive = !isStakeActive;
