@@ -9,7 +9,6 @@ NOTES:
     interface IReceiver {
         function receiveTokens(address tokenAddress, uint256 amount) external;
     }
-- need to change the withdrawAll to allow 'all thats left' on last transfer
 */
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -99,7 +98,7 @@ contract Rewards is ERC721Holder, Ownable {
         uint256 balance = address(this).balance;
         uint256 bonTreasury = balance * 70 / 100;
         uint256 bonStakers = balance * 20 / 100;
-        uint256 bonDevs = balance * 10 / 100;
+        uint256 bonDevs = balance - (bonTreasury + bonStakers);
         ( bool transferOne, ) = payable(0xd02b97b0B3439bf032a237f712a5fa5B161D89d3).call{value: bonTreasury}("");
         ( bool transferTwo, ) = payable(0xad87F2c6934e6C777D95aF2204653B2082c453de).call{value: bonStakers}("");
         ( bool transferThree, ) = payable(0xb1a23cD1dcB4F07C9d766f2776CAa81d33fa0Ede).call{value: bonDevs}("");
