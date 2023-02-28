@@ -24,7 +24,7 @@ contract Rewards is ERC721Holder, Ownable {
 
     uint256 public minimumTime = 7 days;
     uint256 public price = 420000000000000000; // 0.42 matic tax
-    uint256 public rwdRate = 1; // 0.1% of the CURRENT $BON balance
+    uint256 public rwdRate = 10; // 0.1% of the CURRENT $BON balance
     bool public isStakeActive;
 
     event newStaked(address sender, uint256 tokenId);
