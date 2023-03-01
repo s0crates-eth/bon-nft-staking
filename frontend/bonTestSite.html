@@ -1,191 +1,71 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>Bank of Nowhere</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="styles/maineth.css" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
-      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
-      crossorigin="anonymous"
-    />
-    <link rel="icon" href="../images/fav.png" />
-    </head>
+    <link rel="stylesheet" type="text/css" href="bonTestSite.css" />
+  </head>
   
   <body>
-    
-    <br><br>
-    
-    <div style="margin: 50px; margin-top: 10px;" align="center">
-
-        <img src="https://raw.githubusercontent.com/s0crates-eth/BON-WORLD/8ce7480885cb2ec51ce54397bbc49d01701d1650/ETH-DENVER/imageseth/logomain.svg" style="width: 50%;">
-
-        <br><br>
-
-        <a href="https://bankofnowhere.world">
-          <b style="color: #ac3235;">[[www.BANKOFNOWHERE.world]]</b>
-        </a>
-
-        <br><br>
-
-        <img src="https://raw.githubusercontent.com/s0crates-eth/BON-WORLD/main/ETH-DENVER/imageseth/imagemain.png" style="width: 100%;">
-
-        <p>
-          <h1>WE DON'T HAVE<br>TO TRUST THEM ANYMORE</h1>
-          <p align="justify">
-            After hundreds of years of torment at the hands of traditional banks, 
-            we are all <b style="color: #ac3235;">MAD AS HELL</b> and we’re not going to take this anymore!
-            Traditional banks are archaic, bloated, and deceptive – it’s a business 
-            where the most successful banks are the ones who take the most <b style="color: #ac3235;">MONEY FROM YOU</b>. 
-            In the past we had no choice, we were forced to trust bankers and take their 
-            word as truth – but with $BON, we don't have to trust them anymore…
-            <br><br>
-            Bank of Nowhere was formed to finally <b style="color: #ac3235;">FREE THE PEOPLE</b> from unnecessary fees, 
-            rules, and general manipulation. The transparency thats provided by the blockchain 
-            enables a completely decentralized and truthful banking system; 
-            a bank owned and run and <b style="color: #ac3235;">BUILT BY ITS MEMBERS</b>.
-          </p>
-        </p>
-
-        <p>
-          <h1>BUILDING<br>A BETTER BANK</h1>
-          <p align="justify">
-            We want to build a bank based on <b style="color: #ac3235;">OUR PRINCIPALS</b>; we want to build a bank 
-            that is fair, transparent, trustworthy, profitable, dynamic and one that 
-            can stand the test of time.
-            <br><br>
-            We will build this new bank dApp by dApp. Each new dApp will replace tools 
-            and functions that in the past only banks could do – loans to worthy individuals, 
-            unlimited international transfers, long term and secure digital savings, day-to-day 
-            crypto purchases… Each dApp that's built will provide a small 1% tax that will 
-            feed back into the Bank of Nowhere treasury, ensuring that funds are available 
-            to continue to <b style="color: #ac3235;">BUILD INDEFINITELY</b>. Treasury funds will be held in $BON tokens to 
-            ensure our tokenomics stay attractive.
-          </p>
-        </p>
-
-        <p>
-          <h1>$BON TOKENOMICS</h1>
-          <img align="center" src="https://raw.githubusercontent.com/s0crates-eth/BON-WORLD/8ce7480885cb2ec51ce54397bbc49d01701d1650/ETH-DENVER/imageseth/tokentonics.svg" style="width: 60%;">
-          <p align="justify">
-            The $BON token contract was deployed on the 10th of Oct 2022 with 21 million BON 
-            tokens created at genesis.
-            <br>
-            <ul align="left">
-              <li>NO TXN TAX – 0% buy / 0% sell</li>
-              <li>More than 8% of this supply has been BURNED FOREVER</li>
-              <li>More than 5% of this supply was fairly AIRDROPPED to the the $CULT community</li>
-              <li>The remaining supply was released to the open market for a fair ICO sale</li>
-              <li>100% of the original LP tokens were BURNED FOREVER</li>
-            </ul>
-          </p>
-        </p>
-
-        <br><br>
-
-        <div class="container">
+    <div style="margin: 50px;"></div>
+        <div class="container" align="center">
           <p>
-            <h1>FREE $BON NFT</h1>
+            <h1>bonTestSite</h1>
+
+            <div>
+              <label>Token ID</label><br>
+              <input 
+                type="number" 
+                placeholder="420"
+                id="unitInputHTML"
+                onchange="bonTestStakingJS_.onInputUnit()"
+                required
+              >
+            </div>
+
+            <br>
+
             <button
               id="connectButtonHTML"
               class="custom-button"
               style="height: 45px; width: 200px; text-align: center"
-              onclick="EthDenverBonNftMinter_.connectWallet();"
+              onclick="bonTestStakingJS_.connectWallet();"
             >
-              CONNECT WALLET
-            </button><!-- !!!!!!!!!!! -->
+              connect()
+            </button>
 
+            <br>
+            
             <button
-              id="mintButtonHTML"
+              id="call1ButtonHTML"
               class="custom-button"
               style="height: 45px; width: 200px; text-align: center"
-              onclick="EthDenverBonNftMinter_.askContractToMintNft();"
+              onclick="bonTestStakingJS_.askContractToStake();"
             >
-              MINT
-            </button><!-- !!!!!!!!!!! -->
+              stake()
+            </button>
+
+            <br>
+            
+            <button
+            id="call2ButtonHTML"
+            class="custom-button"
+            style="height: 45px; width: 200px; text-align: center"
+            onclick="bonTestStakingJS_.askContractToUnstake();"
+            >
+              unstake()
+            </button>
 
             <h5>
               <u style="color: #ac3235; line-height: 20px;">NOTES:</u> 
-              Polygon mainnet, 1 NFT per wallet, no government spies
+              Polygon mainnet, 0.42 Matic fee
             </h5>
           </p>
         </div>
-
-
     </div>
 
-    <br/><br/>
-
     <footer>
-      <div id="first-row">
-        <div>
-          <img src="https://raw.githubusercontent.com/s0crates-eth/BON-WORLD/main/ETH-DENVER/imageseth/bonlogofooter.png" style="height: 60px" alt="Logo" />
-        </div>
-
-        <div class="imagens-footer">
-          <h2>trade on</h2>
-          <div>
-            <a
-              href="https://quickswap.exchange/#/swap?swapIndex=0&currency0=ETH&currency1=0x47E53f0Ddf71210F2C45dc832732aA188F78AA4f"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://raw.githubusercontent.com/s0crates-eth/BON-WORLD/main/images/quicklogo%201.png"
-                alt="Logo"
-                style="height: 40px"
-              />
-            </a>
-            <a
-              href="https://www.dextools.io/app/en/polygon/pair-explorer/0x26432f7cf51e644c0adcaf3574216ee1c0a9af6d"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://raw.githubusercontent.com/s0crates-eth/BON-WORLD/main/images/dextools%201.png"
-                alt="Logo"
-                style="height: 40px"
-              />
-            </a>
-          </div>
-        </div>
-        <div class="imagens-footer">
-          <h2>join us</h2>
-          <div>
-            <a
-              href="https://twitter.com/BankOfNowhere"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src="https://raw.githubusercontent.com/s0crates-eth/BON-WORLD/main/images/twitter.png" alt="Logo" style="height: 34px" />
-            </a>
-            <a
-              href="https://t.me/BankOfNowhereChat"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src="https://raw.githubusercontent.com/s0crates-eth/BON-WORLD/main/images/Telegram.png" alt="Logo" style="height: 45px" />
-            </a>
-
-            <a
-              href="https://snapshot.org/#/bankofnowhere.eth"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src="https://raw.githubusercontent.com/s0crates-eth/BON-WORLD/main/images/snapshot.png" alt="Logo" style="height: 40px" />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div id="copyright">Copyright &copy; Bank of Nowhere</div>
-
-
       <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-      <script src="EthDenverBonNFT.js"></script>
-
+      <script src="bonTestSite.js"></script>
     </footer>
-    <!-- FOOTER -->
+
   </body>
 </html>

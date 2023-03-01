@@ -23,12 +23,12 @@ contract Rewards is ERC721Holder, Ownable {
     mapping(uint256 => bool) public isStaked;
 
     uint256 public minimumTime = 7 days;
-    uint256 public price = 420000000000000000; // 0.42 matic tax
+    uint256 public price = 420000000000000000; // 0.42 matic tax //!!!!!! change this price1 && add price2
     uint256 public rwdRate = 1; // 0.1% of the CURRENT $BON balance
     bool public isStakeActive;
 
     event newStaked(address sender, uint256 tokenId);
-    event newUnstaked(address sender, uint256 tokenId, uint256 reward);
+    event newUnstaked(address sender, uint256 tokenId, uint256 reward); //!!!!!!!this should be userReward
 
     constructor(address _nftAddress, address _tokenAddress){
         nft = IERC721(_nftAddress);
@@ -76,7 +76,7 @@ contract Rewards is ERC721Holder, Ownable {
         erc20Token.transferFrom(address(this), msg.sender, userReward);
 
         emit newUnstaked(msg.sender, tokenId, userReward);
-    }
+    } //!!!!!!!!!!make this payable and include price2 (it will be set at suuuuper low cost)
 
     // onlyOwnerz
     function setPrice(uint256 _price) external onlyOwner {

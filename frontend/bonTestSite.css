@@ -1,0 +1,28 @@
+.container {
+    background-image: url('https://raw.githubusercontent.com/s0crates-eth/gm/main/images/black_opc50.png');
+    width: (100% - 25px);
+    padding: 25px;
+    border-collapse: collapse;
+    border-radius: 20px;
+    overflow: hidden
+  }
+
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: solid;
+    width: 100%;
+    margin: 3px;
+    border-color: black;
+    background-color: black;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 16px;
+    font-family: 'biosBold', sans-serif;
+}
+
+button:hover {
+    background-color: grey;
+    color: black;
+    border-radius: 16px;
+}
