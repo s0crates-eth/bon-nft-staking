@@ -6,7 +6,7 @@ pragma solidity ^0.8.17;
 NOTES:
 - this is a modified version of:
     https://chainstack.com/deploying-an-nft-staking-contract-on-gnosis-chain/
-- xx
+- added a 0, just check it later
 */
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -23,8 +23,8 @@ contract Rewards is ERC721Holder, Ownable {
     mapping(uint256 => bool) public isStaked;
 
     uint256 public minimumTime = 7 days;
-    uint256 public price = 420000000000000000; // 0.42 matic tax //!!!!!! change this price1 && add price2
-    uint256 public rwdRate = 1; // 0.1% of the CURRENT $BON balance
+    uint256 public price = 420000000000000000; // 0.42 matic tax  //!!!!!! change this price1 && add price2
+	uint256 public rwdRate = 10; // 0.1% of the CURRENT $BON balance
     bool public isStakeActive;
 
     event newStaked(address sender, uint256 tokenId);
@@ -50,7 +50,7 @@ contract Rewards is ERC721Holder, Ownable {
     function calculateRewards(uint256 tokenId) public view returns (uint256) {
         require(isStaked[tokenId], "This Token id was never staked");
         uint erc20Balance = erc20Token.balanceOf(address(this)); 
-        return erc20Balance * (rwdRate / 1000);
+        return erc20Balance * (rwdRate / 10000);
     }
 
     function calculateTime(uint256 tokenId) public view returns (uint256) {
